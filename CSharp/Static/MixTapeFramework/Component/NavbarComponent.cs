@@ -2,7 +2,7 @@
 
 namespace MixTapeFramework.Component
 {
-    public static class NavbarComponent
+    public static class Navbar
     {
         #region Elements
         #endregion

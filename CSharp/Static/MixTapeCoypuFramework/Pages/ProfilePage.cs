@@ -68,8 +68,7 @@ namespace MixTapeCoypuFramework.Pages
         public static void GoTo()
         {
             //Driver.GoTo(Url);
-            NavbarComponent.UserMenu.Click();
-            NavbarComponent.ProfileButton.Click();
+            Navbar.Profile();
         }
 
         public static bool IsAt

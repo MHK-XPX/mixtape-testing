@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component\PlaylistComponent.cs" />
     <Compile Include="Component\NavbarComponent.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="Constants.cs" />

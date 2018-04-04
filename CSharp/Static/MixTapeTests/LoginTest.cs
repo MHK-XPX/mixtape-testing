@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MixTapeCoypuFramework.Component;
 using MixTapeCoypuFramework.Pages;
-using System.Threading;
 
 namespace MixTapeTests
 {
@@ -13,13 +12,17 @@ namespace MixTapeTests
         {
             LoginPage.GoTo();
             LoginPage.LoginAs("testuser").WithPassword("password").Login();
-            //Thread.Sleep(10000);
-            ProfilePage.GoTo();
-            Thread.Sleep(3000);
-            NavbarComponent.GoHome();
-            Thread.Sleep(3000);
-            NavbarComponent.Logout();
-            Thread.Sleep(3000);
+            Assert.AreEqual(Navbar.User, "testuser");
+        }
+
+        [TestMethod]
+        public void Logout()
+        {
+            LoginPage.GoTo();
+            LoginPage.LoginAs("testuser").WithPassword("password").Login();
+            Assert.AreEqual(Navbar.User, "testuser");
+            Navbar.Logout();
+            Assert.IsTrue(LoginPage.IsAt);
         }
     }
 }

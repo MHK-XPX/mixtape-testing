@@ -1,13 +1,14 @@
 ﻿using System;
 using Coypu;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace MixTapeCoypuFramework
 {
     public static class Driver
     {
         private const string HUB_URL = "http://localhost:4444/wd/hub";
-        public const string BaseUrl = "https://mhk-xpx.github.io/mixtape-frontend/";
+        public const string BaseUrl = "https://mhk-xpx.github.io/mixtape-frontend";
         public static BrowserSession Instance;
         public static SessionConfiguration SessConfiguration = new SessionConfiguration();
 
@@ -44,7 +45,7 @@ namespace MixTapeCoypuFramework
 
         public static bool IsAt(string url)
         {
-            return string.Equals(Instance.Location, url);
+            return string.Equals(Instance.Location, BaseUrl + url);
         }
 
         public static void Close()

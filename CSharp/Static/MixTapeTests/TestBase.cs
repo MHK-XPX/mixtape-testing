@@ -1,6 +1,6 @@
 ﻿using MixTapeCoypuFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MixTapeCoypuFramework.Pages;
+using System.Threading;
 
 namespace MixTapeTests
 {
@@ -11,6 +11,11 @@ namespace MixTapeTests
         public void Setup()
         {
             Driver.Initialize(Driver.DriverTypes.Chrome);
+        }
+
+        public void Wait(int milliseconds)
+        {
+            Thread.Sleep(milliseconds);
         }
 
         [TestCleanup]

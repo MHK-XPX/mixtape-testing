@@ -125,6 +125,10 @@ namespace MixTapeCoypuFramework.Pages
 
         public static void LoginWithDefault()
         {
+            if (!IsAt)
+            {
+                GoTo();
+            }
             UserName.FillInWith("testuser");
             Password.FillInWith("password");
             LoginButton.Click();
