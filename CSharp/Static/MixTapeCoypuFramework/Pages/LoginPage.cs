@@ -3,6 +3,9 @@ using MixTapeCoypuFramework.Component;
 
 namespace MixTapeCoypuFramework.Pages
 {
+    /// <summary>
+    /// The Login page object, handles the Login page functionality
+    /// </summary>
     public static class LoginPage
     {
         private static string Url = "/#/login";
@@ -142,6 +145,9 @@ namespace MixTapeCoypuFramework.Pages
         }
     }
 
+    /// <summary>
+    /// A command class to allow chaining for the "CreateNewAccount" method
+    /// </summary>
     public class CreateCommand
     {
         private string firstName;
@@ -200,6 +206,9 @@ namespace MixTapeCoypuFramework.Pages
         }
     }
 
+    /// <summary>
+    /// A command class to allow chaining for the "LoginAs" method
+    /// </summary>
     public class LoginCommand
     {
         private readonly string username;
@@ -229,8 +238,8 @@ namespace MixTapeCoypuFramework.Pages
             LoginPage.Password.FillInWith(password);
             if (rememberMe) LoginPage.RememberMe.Check();
             LoginPage.LoginButton.Click();
-            Navbar.WaitUntillLoaded();
-            Playlist.WaitUntillLoaded();
+            Navbar.WaitUntilLoaded();
+            Playlist.WaitUntilLoaded();
         }
     }
 }

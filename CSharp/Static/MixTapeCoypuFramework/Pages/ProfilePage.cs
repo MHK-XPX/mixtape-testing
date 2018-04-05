@@ -3,6 +3,9 @@ using MixTapeCoypuFramework.Component;
 
 namespace MixTapeCoypuFramework.Pages
 {
+    /// <summary>
+    /// The Profile page object, handles the Profile page functionality
+    /// </summary>
     public static class ProfilePage
     {
         private static string Url = Driver.BaseUrl + "/#/profile";
@@ -90,6 +93,9 @@ namespace MixTapeCoypuFramework.Pages
         }
     }
 
+    /// <summary>
+    /// A command class for chaining a profile update with the "UpdateInfo" method
+    /// </summary>
     public class ProfileCommand
     {
         private string firstName;

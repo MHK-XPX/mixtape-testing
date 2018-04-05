@@ -4,6 +4,9 @@ using System.Threading;
 
 namespace MixTapeCoypuFramework.Component
 {
+    /// <summary>
+    /// The Navbar component object, handles the Navbar functionality
+    /// </summary>
     public static class Navbar
     {
         #region Elements
@@ -47,23 +50,22 @@ namespace MixTapeCoypuFramework.Component
 
         public static void Last()
         {
-            Driver.Instance.FindCss("#navbarSupportedContent > div:nth-child(2) > img:nth-child(1)").Click();
+            Driver.Instance.FindId("lastSongButton").Click();
         }
 
         public static void PlayPause()
         {
-            Driver.Instance.FindCss("#navbarSupportedContent > div:nth-child(2) > img:nth-child(2)").Click();
+            Driver.Instance.FindId("playPauseButton").Click();
         }
 
         public static void Next()
         {
-            Driver.Instance.FindCss("#navbarSupportedContent > div:nth-child(2) > img:nth-child(3)").Click();
+            Driver.Instance.FindId("nextSongButton").Click();
         }
 
         public static void Repeat()
         {
-            //#navbarSupportedContent > div:nth-child(2) > img:nth-child(4)
-            Driver.Instance.FindXPath("//*[@id='navbarSupportedContent']/div[1]/img[4]").Click();
+            Driver.Instance.FindId("repeatButton").Click();
         }
 
         public static void ShowPage()
@@ -88,7 +90,7 @@ namespace MixTapeCoypuFramework.Component
             Driver.Instance.ClickButton("Logout");
         }
 
-        public static void WaitUntillLoaded()
+        public static void WaitUntilLoaded()
         {
             bool isLoaded = false;
 

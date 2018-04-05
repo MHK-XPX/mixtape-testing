@@ -4,6 +4,9 @@ using System.Threading;
 
 namespace MixTapeCoypuFramework.Component
 {
+    /// <summary>
+    /// The Playlist component object, handles the Playlist sidebar functionality
+    /// </summary>
     public static class Playlist
     {
         #region Elements
@@ -58,7 +61,7 @@ namespace MixTapeCoypuFramework.Component
             Playlists.FindCss("li", Options.First).Click();
         }
 
-        public static void WaitUntillLoaded()
+        public static void WaitUntilLoaded()
         {
             bool isLoaded = false;
 
@@ -67,10 +70,14 @@ namespace MixTapeCoypuFramework.Component
                 try
                 {
 
-                    if (Playlists.InnerHTML != null)
+                    if (Playlists.InnerHTML.Contains("li"))
                     {
                         isLoaded = true;
                         break;
+                    }
+                    else
+                    {
+                        Thread.Sleep(25);
                     }
                 }
                 catch (Coypu.MissingHtmlException e)
