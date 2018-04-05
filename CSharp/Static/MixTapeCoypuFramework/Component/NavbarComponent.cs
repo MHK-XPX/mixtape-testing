@@ -1,5 +1,6 @@
 ﻿using Coypu;
 using OpenQA.Selenium;
+using System.Threading;
 
 namespace MixTapeCoypuFramework.Component
 {
@@ -85,6 +86,27 @@ namespace MixTapeCoypuFramework.Component
         {
             UserMenu.Click();
             Driver.Instance.ClickButton("Logout");
+        }
+
+        public static void WaitUntillLoaded()
+        {
+            bool isLoaded = false;
+
+            while (!isLoaded)
+            {
+                try
+                {
+                    if (Driver.Instance.FindField("Search").Id != null)
+                    {
+                        isLoaded = true;
+                        break;
+                    }
+                }
+                catch (Coypu.MissingHtmlException e)
+                {
+                    Thread.Sleep(25);
+                }
+            }
         }
     }
 }

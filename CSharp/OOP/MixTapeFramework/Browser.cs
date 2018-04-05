@@ -14,20 +14,6 @@ namespace MixTapeFramework
         private const string HUB_URL = "http://localhost:4444/wd/hub";
 	    private IWebDriver driver;
 
-        //public static Dictionary<BrowserTypes, DriverOptions> browsersToBeTested = new Dictionary<BrowserTypes, DriverOptions>()
-        //{
-        //    {BrowserTypes.InternetExplorer, new InternetExplorerOptions()},
-        //    {BrowserTypes.FireFox, new FirefoxOptions()},
-        //    {BrowserTypes.Chrome, new ChromeOptions()}
-        //};
-
-        //public static Dictionary<BrowserTypes, RemoteWebDriver> browsersToBeTested = new Dictionary<BrowserTypes, IWebDriver>()
-        //{
-        //    {BrowserTypes.InternetExplorer, InternetExplorerDriver},
-        //    {BrowserTypes.FireFox, FirefoxDriver},
-        //    {BrowserTypes.Chrome, ChromeDriver}
-        //};
-
         public enum BrowserTypes
         {
             Chrome,
@@ -42,10 +28,21 @@ namespace MixTapeFramework
 
         public Browser(BrowserTypes browserType)
         {
-            //WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-            //ChromeOptions options = new ChromeOptions();
-		    //driver = new RemoteWebDriver(new Uri(HUB_URL), options);
+            switch (browserType)
+            {
+                case BrowserTypes.Chrome:
+                    driver = new ChromeDriver();
+                    break;
+                case BrowserTypes.FireFox:
+                    driver = new FirefoxDriver();
+                    break;
+                case BrowserTypes.InternetExplorer:
+                    driver = new InternetExplorerDriver();
+                    break;
+                default:
+                    driver = new ChromeDriver();
+                    break;
+            }
 	    }
 
         public void GoTo(String url)

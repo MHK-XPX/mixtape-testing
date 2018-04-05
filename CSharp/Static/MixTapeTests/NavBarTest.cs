@@ -22,24 +22,16 @@ namespace MixTapeTests
         {
             LoginPage.GoTo();
             LoginPage.LoginAs("testuser").WithPassword("password").Login();
-            Wait(3000);
-            Assert.AreEqual(Navbar.User, "testuser");
+            Wait(100);
             Playlist.ClickPlaylist("Playlist 1");
-            Wait(1000);
             Navbar.Next();
-            Wait(1000);
             Navbar.PlayPause();
-            Wait(1000);
-            Navbar.PlayPause();
-            Wait(1000);
-            Navbar.Last();
-            Wait(1000);
+            //Navbar.Last();
+            //Wait(1000);
             Navbar.CollapseSideBar();
-            Wait(1000);
+            //Wait(3000);
             Navbar.ExpandSideBar();
-            Wait(1000);
-            Navbar.Repeat();
-            Wait(1000);
+            Wait(10000);
         }
     }
 }

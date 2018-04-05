@@ -12,7 +12,6 @@ namespace MixTapeTests
         {
             LoginPage.GoTo();
             LoginPage.LoginAs("testuser").WithPassword("password").Login();
-            //Wait(500);
             ProfilePage.GoTo();
         }
     }

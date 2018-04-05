@@ -1,4 +1,5 @@
 ﻿using Coypu;
+using MixTapeCoypuFramework.Component;
 
 namespace MixTapeCoypuFramework.Pages
 {
@@ -228,6 +229,8 @@ namespace MixTapeCoypuFramework.Pages
             LoginPage.Password.FillInWith(password);
             if (rememberMe) LoginPage.RememberMe.Check();
             LoginPage.LoginButton.Click();
+            Navbar.WaitUntillLoaded();
+            Playlist.WaitUntillLoaded();
         }
     }
 }
