@@ -4,7 +4,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 /**
  * <p>Base PageObject class.
@@ -18,6 +22,8 @@ import org.openqa.selenium.support.PageFactory;
 public class PageObject {
 
     protected WebDriver driver;
+
+    static String URL = "https://mhk-xpx.github.io/mixtape-frontend/#/home";
 
     public WebElement getYouTubeButton(){
         WebElement youTubeButton = driver.findElement(By.cssSelector(".ytp-youtube-button ytp-button yt-uix-sessionlink"));
@@ -97,9 +103,40 @@ public class PageObject {
     }
 
     public void goToMixTapeHome() {
-        driver.navigate().to("https://mhk-xpx.github.io/mixtape-frontend/#/home");
+        driver.navigate().to(URL);
     }
 
-    
+    public WebElement getNavItem(){return driver.findElement(By.cssSelector("[ngbdropdown]"));}
 
+    public WebElement getButton() {return driver.findElement(By.cssSelector("button"));}
+
+    public WebElement getDropDownItem() {return driver.findElement(By.cssSelector(".dropdown-item"));}
+
+    public boolean buttonBlock() {return getButton().getAttribute("disabled").equals("null");}
+
+    public boolean dropDownShow() {return !getButton().getAttribute("class").contains("show");}
+
+    public void actionNavItem() {
+        Actions builder = new Actions(driver);
+        Action action = builder
+                .click(getNavItem())
+                .click(getDropDownItem())
+                .build();
+        action.perform();
+    }
+
+
+    public void actionSignin() {
+        Actions builder = new Actions(driver);
+        builder
+            .sendKeys(getSigninField(0), "hvincent")
+            .sendKeys(getSigninField(1), "d1r9a8g5o")
+            .click(getButton())
+            .build()
+            .perform();
+    }
+
+    private WebElement getSigninField(int i) {return driver.findElements(By.cssSelector("form > input")).get(i);}
+
+    public boolean frontEnd() {return driver.getCurrentUrl().contains("home");}
 }
