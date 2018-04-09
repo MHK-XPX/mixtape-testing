@@ -1,4 +1,4 @@
-package PageObjectsAndTools.com.xpanxion.training.java.selenium.core.services;
+package PageObjectsAndTools.services;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
