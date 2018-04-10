@@ -178,38 +178,7 @@ public class PageObject {
         driver.navigate().to(URL);
     }
 
-    public WebElement getNavItem(){return driver.findElement(By.cssSelector("[ngbdropdown]"));}
-
-    public WebElement getButton() {return driver.findElement(By.cssSelector("button"));}
-
-    public WebElement getDropDownItem() {return driver.findElement(By.cssSelector(".dropdown-item"));}
-
-    public boolean buttonBlock() {return getButton().getAttribute("disabled").equals("null");}
-
-    public boolean dropDownShow() {return !getButton().getAttribute("class").contains("show");}
-
-    public void actionNavItem() {
-        Actions builder = new Actions(driver);
-        Action action = builder
-                .click(getNavItem())
-                .click(getDropDownItem())
-                .build();
-        action.perform();
-    }
 
 
-    public void actionSignin() {
-        Actions builder = new Actions(driver);
-        builder
-                .sendKeys(getSigninField(0), "hvincent")
-                .sendKeys(getSigninField(1), "d1r9a8g5o")
-                .click(getButton())
-                .build()
-                .perform();
-    }
-
-    private WebElement getSigninField(int i) {return driver.findElements(By.cssSelector("form > input")).get(i);}
-
-    public boolean frontEnd() {return driver.getCurrentUrl().contains("home");}
 }
 
