@@ -26,9 +26,9 @@ public class MadilenaPlaylistChillTunesTest extends BaseTest{
     }
 
     @Test(dataProvider = "csvFileLoader")
-    public void  verifyData(String n1 , String n2) {
+    public void  verifyData(String n1 , String n2 , String n3) {
         setUp();
-        Assert.assertTrue(pageObject.runPlaylistLinksMethod(n1, n2) , " 'PLAYLIST' LINK DOES NOT NAVIGATE TO CORRECT PAGE");
+        Assert.assertTrue(pageObject.runMadilenaPlaylist(n1, n2, n3) , " 'PLAYLIST' LINK DOES NOT NAVIGATE TO CORRECT PAGE");
     }
 }
 
