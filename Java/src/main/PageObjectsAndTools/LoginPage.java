@@ -68,6 +68,19 @@ public class LoginPage extends PageObject {
         WebElement button = driver.findElement(By.cssSelector("form > button"));
         return button;
     }
+    /**
+     * runMadilenaPlaylist will run the songs within a specific playlist of Madilena and then check that they generate
+     * an expected youtube video
+     * @param playlistLink selects a playlist from Madilena's mixtape page
+     * @param songLink selects a song from a specific playlist within Madilena's mixtape page
+     * @param expectedVideoName the name of the video that YouTube displays
+     * @return a boolean value as to whether the title that youtube displays is truly the desired titled
+     */
+
+    public boolean runMadilenaPlaylist(String playlistLink , String songLink, String expectedVideoName){
+        MadilenaRobotLogin();
+        return runPlaylistLinksMethod(playlistLink , songLink, expectedVideoName);
+    }
 
     /**
      * creates the login for Madilena's mixtape page
@@ -81,6 +94,7 @@ public class LoginPage extends PageObject {
      * @param UsernameSearchText the username you want to input
      * @param PasswordSearchText the password you want to input
      */
+
     public void setLogin(String UsernameSearchText , String PasswordSearchText) {
         goToMixTapeLogin();
         UserNameLogin().clear();

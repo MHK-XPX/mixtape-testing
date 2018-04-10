@@ -2,15 +2,14 @@ package PageObjectsAndTools;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
+
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
 /**
  * <p>Base PageObject class.
  *
@@ -18,8 +17,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * extend this class, and provide the Selenium WebDriver object as an argument constructor to
  * interact with the current web page.
  */
+
 public class PageObject {
-    static String URL = "https://mhk-xpx.github.io/mixtape-frontend/#/home";
+
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected String baseURL = "https://mhk-xpx.github.io/mixtape-frontend/";
@@ -49,8 +49,6 @@ public class PageObject {
         driver.navigate().to(baseURL + "#/home");
     }
 
-
-
     public WebElement getMixtapeLogo(){
         WebElement logo = driver.findElement(By.xpath("//h4[@class = d'-inline']"));
         return logo;
@@ -73,6 +71,7 @@ public class PageObject {
      *
      * @param driver The WebDriver object to use. This should be passed in from the test method.
      */
+
     public PageObject(WebDriver driver) {
 
         this(driver, null);
@@ -88,6 +87,7 @@ public class PageObject {
      * @param driver The WebDriver object to use. This should be passed in from the test method.
      * @param url The URL to load prior to instantiation.
      */
+
     public PageObject(WebDriver driver, String url) {
         this.driver = driver;
 
@@ -108,21 +108,7 @@ public class PageObject {
     }
 
     /**
-     * runMadilenaPlaylist will run the songs within a specific playlist of Madilena and then check that they generate
-     * an expected youtube video
-     * @param playlistLink selects a playlist from Madilena's mixtape page
-     * @param songLink selects a song from a specific playlist within Madilena's mixtape page
-     * @param expectedVideoName the name of the video that YouTube displays
-     * @return a boolean value as to whether the title that youtube displays is truly the desired titled
-     */
-
-    public boolean runMadilenaPlaylist(String playlistLink , String songLink, String expectedVideoName){
-        loginPage.MadilenaRobotLogin();
-        return runPlaylistLinksMethod(playlistLink , songLink, expectedVideoName);
-    }
-
-    /**
-     * runPlaylistLinksMethod will run the songs within a specific playlist of a mixtape page and then chack that they
+     * runPlaylistLinksMethod will run the songs within a specific playlist of a mixtape page and then check that they
      * generate the correct youtube video
      * @param playlistLink selects a playlist from mixtape page
      * @param songLink selects a song from a specific playlist within mixtape page
@@ -165,10 +151,6 @@ public class PageObject {
                 .findElement(By.linkText(playlistLink))
                 .click();
     }
-
-
-
-
 
 }
 
