@@ -25,6 +25,7 @@ public class PageObject {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected String baseURL = "https://mhk-xpx.github.io/mixtape-frontend/";
+    LoginPage loginPage;
 
     public WebElement getYouTubeButton(){
         WebElement youTubeButton = driver.findElement(By.xpath("//a[@class= 'ytp-youtube-button ytp-button yt-uix-sessionlink']"));
@@ -42,28 +43,7 @@ public class PageObject {
         driver.navigate().to(baseURL + "#/home");
     }*/
 
-    public void goToMixTapeLogin() {
-        driver.navigate().to(baseURL + "#/login");
-    }
 
-    public WebElement UserNameLogin(){
-        WebElement username = driver.findElement(By.id("inputEmail3"));
-        return username;
-    }
-
-    public WebElement PasswordLogin(){
-        WebElement password = driver.findElement(By.id("inputPassword3"));
-        return password;
-    }
-
-    public WebElement SignInButton(){
-        WebElement button = driver.findElement(By.cssSelector("form > button"));
-        return button;
-    }
-
-    public void MadilenaRobotLogin(){
-        setLogin("MadilenaM" , "NickSurfsBirdRock");
-    }
 
     public WebElement getMixtapeLogo(){
         WebElement logo = driver.findElement(By.xpath("//h4[@class = d'-inline']"));
@@ -125,7 +105,7 @@ public class PageObject {
  * @return boolean as to whether the title of the page navigated to equals the expectedVideoName title
  */
     public boolean runMadilenaPlaylist(String playlistLink , String songLink, String expectedVideoName){
-        MadilenaRobotLogin();
+        loginPage.MadilenaRobotLogin();
         return runPlaylistLinksMethod(playlistLink , songLink, expectedVideoName);
     }
 
@@ -159,20 +139,7 @@ public class PageObject {
                 .click();
     }
 
-    public void setLogin(String UsernameSearchText , String PasswordSearchText) {
-        goToMixTapeLogin();
-        UserNameLogin().clear();
-        UserNameLogin().sendKeys(UsernameSearchText);
-        PasswordLogin().clear();
-        PasswordLogin().sendKeys(PasswordSearchText);
-        SignInButton().click();
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            System.out.println("DID NOT WAIT BEFORE CLICKING ENTER");
-        }
-    }
 
     public void goToMixTapeHome() {
         driver.navigate().to(URL);
