@@ -2,6 +2,7 @@ package TestObjects;
 
 import java.lang.reflect.Method;
 
+import PageObjectsAndTools.PageObject;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 
 import org.openqa.selenium.WebDriver;
@@ -27,6 +28,7 @@ public class BaseTest {
      * the object will be available to all sub-classes.
      */
     protected WebDriver driver;
+    protected PageObject page;
 
     /**
      * Singleton CSVService object available to all classes.
@@ -45,6 +47,7 @@ public class BaseTest {
         this.driver = new ChromeDriver();
         LOG.debug("Finished initializing WebDriver!");
         LOG.debug("Beginning Test '{}'...", this.getTestName(m));
+        //page.goToMixTapeHome();
     }
 
     /**
