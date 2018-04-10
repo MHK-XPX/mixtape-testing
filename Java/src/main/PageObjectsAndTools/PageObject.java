@@ -17,8 +17,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * <p>This class is the intended root class for all Selenium Page Objects.  All page objects should
  * extend this class, and provide the Selenium WebDriver object as an argument constructor to
  * interact with the current web page.
- *
- *
  */
 public class PageObject {
     static String URL = "https://mhk-xpx.github.io/mixtape-frontend/#/home";
@@ -27,10 +25,18 @@ public class PageObject {
     protected String baseURL = "https://mhk-xpx.github.io/mixtape-frontend/";
     LoginPage loginPage;
 
+    /**
+     * @return youtubebutton webelement within the video that is displayed when a song is played.
+     */
+
     public WebElement getYouTubeButton(){
         WebElement youTubeButton = driver.findElement(By.xpath("//a[@class= 'ytp-youtube-button ytp-button yt-uix-sessionlink']"));
         return youTubeButton;
     }
+
+    /**
+     * @return the text of the video name that youtube displays
+     */
 
     public String getYouTubeVideoName(){
         String videoName = driver
@@ -39,9 +45,9 @@ public class PageObject {
         return videoName;
     }
 
-    /*public void goToMixTapeHome() {
+    public void goToMixTapeHome() {
         driver.navigate().to(baseURL + "#/home");
-    }*/
+    }
 
 
 
@@ -49,6 +55,10 @@ public class PageObject {
         WebElement logo = driver.findElement(By.xpath("//h4[@class = d'-inline']"));
         return logo;
     }
+
+    /**
+     * @return the playlist header above the list of playlists you make
+     */
 
     public WebElement getPlaylistLogo(){
         WebElement playlistlogo = driver.findElement(By.xpath("//div[@class = 'card-header text-center font-weight-bold']"));
@@ -92,22 +102,33 @@ public class PageObject {
      *
      * This method is called as a consequence of creating a new instance of this PageObject.
      */
+
     public void load() {
         PageFactory.initElements(this.driver, this);
     }
 
-
-
     /**
- * Clicks songLink, navigates to new page, and verifies that the title of the page equals the expectedVideoName title.
- * @param songLink we are testing
- * @param expectedVideoName title of page navigated to
- * @return boolean as to whether the title of the page navigated to equals the expectedVideoName title
- */
+     * runMadilenaPlaylist will run the songs within a specific playlist of Madilena and then check that they generate
+     * an expected youtube video
+     * @param playlistLink selects a playlist from Madilena's mixtape page
+     * @param songLink selects a song from a specific playlist within Madilena's mixtape page
+     * @param expectedVideoName the name of the video that YouTube displays
+     * @return a boolean value as to whether the title that youtube displays is truly the desired titled
+     */
+
     public boolean runMadilenaPlaylist(String playlistLink , String songLink, String expectedVideoName){
         loginPage.MadilenaRobotLogin();
         return runPlaylistLinksMethod(playlistLink , songLink, expectedVideoName);
     }
+
+    /**
+     * runPlaylistLinksMethod will run the songs within a specific playlist of a mixtape page and then chack that they
+     * generate the correct youtube video
+     * @param playlistLink selects a playlist from mixtape page
+     * @param songLink selects a song from a specific playlist within mixtape page
+     * @param expectedVideoName the name of the video that YouTube displays
+     * @return a boolean value as to whether the title that youtube displays is truly the desired titled
+     */
 
     public boolean runPlaylistLinksMethod(String playlistLink , String songLink, String expectedVideoName) {
         clickDesiredPlaylist(playlistLink);
@@ -119,8 +140,9 @@ public class PageObject {
     }
 
     /**
-     Clicks the links specified from Requirement 1.
+     Clicks playlist song
      */
+
     protected void clickPlaylistSong(String songLink) {
         driver
                 .findElement(By.xpath("//div[@class = 'card ng-tns-c4-10']"))
@@ -132,6 +154,11 @@ public class PageObject {
         }
     }
 
+    /**
+     * clicks a desired playlist within a mixtape page
+     * @param playlistLink the playlist you want to click
+     */
+
     protected void clickDesiredPlaylist(String playlistLink){
         wait.until(ExpectedConditions.visibilityOf(getPlaylistLogo()));
         driver.findElement(By.cssSelector(".col-sm-2 shadow no-padding"))
@@ -140,10 +167,6 @@ public class PageObject {
     }
 
 
-
-    public void goToMixTapeHome() {
-        driver.navigate().to(URL);
-    }
 
 
 
