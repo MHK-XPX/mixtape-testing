@@ -35,28 +35,52 @@ public class LoginPage extends PageObject {
         action.perform();
     }
 
+    /**
+     * takes you to the login page url
+     */
+
     public void goToMixTapeLogin() {
         driver.navigate().to(baseURL + "#/login");
     }
 
+    /**
+     * @return username field
+     */
     public WebElement UserNameLogin(){
         WebElement username = driver.findElement(By.id("inputEmail3"));
         return username;
     }
+
+    /**
+     * @return the password field
+     */
 
     public WebElement PasswordLogin(){
         WebElement password = driver.findElement(By.id("inputPassword3"));
         return password;
     }
 
+    /**
+     * @return the "sign in" button
+     */
+
     public WebElement SignInButton(){
         WebElement button = driver.findElement(By.cssSelector("form > button"));
         return button;
     }
 
+    /**
+     * creates the login for Madilena's mixtape page
+     */
     public void MadilenaRobotLogin(){
         setLogin("MadilenaM" , "NickSurfsBirdRock");
     }
+
+    /**
+     * sends login credentials to the username and password fields
+     * @param UsernameSearchText the username you want to input
+     * @param PasswordSearchText the password you want to input
+     */
     public void setLogin(String UsernameSearchText , String PasswordSearchText) {
         goToMixTapeLogin();
         UserNameLogin().clear();
@@ -71,6 +95,4 @@ public class LoginPage extends PageObject {
             System.out.println("DID NOT WAIT BEFORE CLICKING ENTER");
         }
     }
-
-
 }
