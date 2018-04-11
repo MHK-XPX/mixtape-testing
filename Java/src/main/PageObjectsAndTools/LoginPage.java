@@ -1,24 +1,31 @@
 package PageObjectsAndTools;
+<<<<<<< Updated upstream
+=======
+
+import PageObjectsAndTools.BaseObject;
+>>>>>>> Stashed changes
 import PageObjectsAndTools.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.script.ScriptContext;
 
 
 public class LoginPage extends PageObject {
 
-
-    public LoginPage(WebDriver driver) {
-        super(driver);
+    public LoginPage(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
     }
 
     public WebElement getNavItem(){return driver.findElement(By.cssSelector("[ngbdropdown]"));}
 
-    public WebElement getButton() {return driver.findElement(By.cssSelector("button"));}
+    public WebElement getButton() {
+        return driver.findElement(By.cssSelector("form > button"));
+    }
 
     public WebElement getDropDownItem() {return driver.findElement(By.cssSelector(".dropdown-item"));}
 

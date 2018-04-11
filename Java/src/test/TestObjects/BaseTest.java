@@ -1,17 +1,35 @@
 package TestObjects;
 
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import PageObjectsAndTools.LoginPage;
 import PageObjectsAndTools.PageObject;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 import PageObjectsAndTools.services.CSVService;
 
 /**
@@ -27,27 +45,55 @@ public class BaseTest {
      * The WebDriver object for use in testing. Since the scope is protected,
      * the object will be available to all sub-classes.
      */
-    protected WebDriver driver;
-    protected PageObject page;
 
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected PageObject pageObject;
+    protected LoginPage loginPage;
+    static String URL = "https://mhk-xpx.github.io/mixtape-frontend/#/login";
     /**
      * Singleton CSVService object available to all classes.
      */
     public static final CSVService csvService = new CSVService();
+
+/*    *//**
+     * Sets up for the test driver and grabs any test parameters.
+     * @param  browser gets browser to be used
+     * @param signin decides whether to signin or not
+     * @throws MalformedURLException
+     * @throws InterruptedException
+     *//*
+    @Parameters({"selenium.browser"})
+    @BeforeTest
+    public void setupTest( String browser ) throws MalformedURLException, InterruptedException {
+        if (browser == null)
+            browser = "chrome";
+        MutableCapabilities options = setupOptions(browser);
+        driver = this.localWebDriver(options);
+        wait = new WebDriverWait(driver, 10);
+    }*/
 
     /**
      * This method is executed before a test method begins, using TestNG's @BeforeMethod
      * annotation. This method is primarily responsible for obtaining a unique
      * WebDriver object for the test to use.
      */
+    @Parameters({"signin", "selenium.browser"})
     @BeforeMethod
-    public void setup(Method m) {
+    public void setup(Method m, boolean signin, String browser) {
         LOG.debug("Initializing WebDriver...");
-        ChromeDriverManager.getInstance().setup();
-        this.driver = new ChromeDriver();
         LOG.debug("Finished initializing WebDriver!");
         LOG.debug("Beginning Test '{}'...", this.getTestName(m));
-        //page.goToMixTapeHome();
+        MutableCapabilities options = setupOptions(browser);
+        driver = this.localWebDriver(options);
+        wait = new WebDriverWait(driver, 10);
+        driver.get(URL);
+        if (signin){
+            pageObject = new PageObject(driver, wait);
+            pageObject.actionSignin();
+        }else{
+            loginPage = new LoginPage(driver, wait);
+        }
     }
 
     /**
@@ -59,8 +105,77 @@ public class BaseTest {
     public void teardown(Method m) {
         LOG.debug("Finished Test '{}'.", this.getTestName(m));
         LOG.debug("Tearing down WebDriver...");
-        this.driver.quit();
         LOG.debug("Finished tearing down WebDriver!");
+        driver.close();
+    }
+
+    private WebDriver localWebDriver(MutableCapabilities options) {
+        switch (options.getClass().getSimpleName()) {
+            case "FirefoxOptions":
+                WebDriverManager.getInstance(FirefoxDriver.class).setup();
+                FirefoxDriver firefox = new FirefoxDriver((FirefoxOptions) options);
+                return firefox;
+
+            case "InternetExplorerOptions":
+                WebDriverManager.getInstance(InternetExplorerDriver.class).setup();
+                InternetExplorerDriver ie = new InternetExplorerDriver((InternetExplorerOptions) options);
+                return ie;
+            case "SafariOptions":
+                // WebDriverManager does not support safari, cause Apple =P
+                SafariDriver safari = new SafariDriver((SafariOptions) options);
+                return safari;
+
+            case "EdgeOptions":
+                WebDriverManager.getInstance(EdgeDriver.class).setup();
+                EdgeDriver edge = new EdgeDriver((EdgeOptions) options);
+                return edge;
+
+            case "OperaOptions":
+                WebDriverManager.getInstance(OperaDriver.class).setup();
+                OperaDriver opera = new OperaDriver((OperaOptions) options);
+                return opera;
+
+            case "ChromeOptions":
+            default:
+                WebDriverManager.getInstance(ChromeDriver.class).setup();
+                ChromeDriver chrome = new ChromeDriver((ChromeOptions) options);
+                return chrome;
+        }
+    }
+
+    private MutableCapabilities setupOptions(String browser) {
+        switch (browser.toLowerCase()) {
+            case "firefox":
+                FirefoxOptions firefox = new FirefoxOptions();
+                firefox.setLogLevel(FirefoxDriverLogLevel.ERROR);
+                firefox.setHeadless(false);
+                return firefox;
+
+            case "ie":
+                InternetExplorerOptions ie = new InternetExplorerOptions();
+                ie.destructivelyEnsureCleanSession();
+                ie.enablePersistentHovering();
+                return ie;
+
+            case "safari":
+                SafariOptions safari = new SafariOptions();
+                return safari;
+
+            case "edge":
+                EdgeOptions edge = new EdgeOptions();
+                return edge;
+
+            case "opera":
+                OperaOptions opera = new OperaOptions();
+                return opera;
+
+            case "chrome":
+            default:
+                ChromeOptions chrome = new ChromeOptions();
+                chrome.setHeadless(false);
+                return chrome;
+        }
+
     }
 
     /**
