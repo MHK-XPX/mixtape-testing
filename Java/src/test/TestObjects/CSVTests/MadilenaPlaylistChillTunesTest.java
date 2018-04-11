@@ -9,12 +9,13 @@ import org.testng.annotations.Test;
 import TestObjects.BaseTest;
 
 public class MadilenaPlaylistChillTunesTest extends BaseTest{
-    PageObject pageObject;
+    //PageObject pageObject;
     LoginPage loginPage;
 
     public void setUp() {
         loginPage = new LoginPage(driver);
-        loginPage.goToMixTapeHome();
+        loginPage.goToMixTapeLogin();
+        loginPage.MadilenaRobotLogin();
     }
 
     String fileName = "/home/xpanxion/IdeaProjects/JavaMixtapeAutomation/mixtape-testing/Java/src/main/resources/MadilenaPlaylistChillTunes.csv";
@@ -30,6 +31,7 @@ public class MadilenaPlaylistChillTunesTest extends BaseTest{
     @Test(dataProvider = "csvFileLoader")
     public void  verifyData(String n1 , String n2 , String n3) {
         setUp();
+
         Assert.assertTrue(loginPage.runMadilenaPlaylist(n1, n2, n3) , " 'PLAYLIST' LINK DOES NOT NAVIGATE TO CORRECT PAGE");
     }
 }
