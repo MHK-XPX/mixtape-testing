@@ -154,10 +154,10 @@ public class PageObject {
      */
 
     protected void clickDesiredPlaylist(String playlistLink){
-       driver.findElement(By.xpath("//div[@class = 'side-bar no-padding']"))
-               .findElement(By.xpath("//ul[contains(text() , "+playlistLink+")]"))
+       driver
+               .findElement(By.xpath("//ul[@class = 'list-group list-group-flush']"))
+               .findElement(By.xpath("//li[contains(text() , "+playlistLink+")]"))
                .click();
-       waitUtils.hardWait(1000);
 
     }
 
