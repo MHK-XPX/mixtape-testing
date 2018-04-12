@@ -8,7 +8,7 @@ namespace MixTapeCoypuFramework.Pages
     /// </summary>
     public static class ProfilePage
     {
-        private static string Url = Driver.BaseUrl + "/#/profile";
+        private static string Url = "/#/profile";
 
         #region Elements
         public static ElementScope FirstName

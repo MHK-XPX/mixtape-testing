@@ -1,4 +1,5 @@
 ﻿using Coypu;
+using MixTapeCoypuFramework.Pages;
 using OpenQA.Selenium;
 using System.Threading;
 
@@ -41,6 +42,15 @@ namespace MixTapeCoypuFramework.Component
         public static void GoHome()
         {
             Driver.Instance.FindSection("Mi").Click();
+            /* Sleep until we get to the Dashboard.
+               Sometimes the next command happens before the page is loaded.
+               Not typically an issue with Coypu except for certain situations, but probably
+               useful for for the base Selenium Framework, and might as well stay consistent.
+            */
+            while (!DashboardPage.IsAt)
+            {
+                Thread.Sleep(20);
+            }
         }
 
         public static void Search(string query)
@@ -82,12 +92,30 @@ namespace MixTapeCoypuFramework.Component
         {
             UserMenu.Click();
             Driver.Instance.ClickButton("Profile");
+            /* Sleep until we get to the Profile Page.
+               Sometimes the next command happens before the page is loaded.
+               Not typically an issue with Coypu except for certain situations, but probably
+               useful for for the base Selenium Framework, and might as well stay consistent.
+            */
+            while (!ProfilePage.IsAt)
+            {
+                Thread.Sleep(20);
+            }
         }
 
         public static void Logout()
         {
             UserMenu.Click();
             Driver.Instance.ClickButton("Logout");
+            /* Sleep until we get to the Login Page.
+               Sometimes the next command happens before the page is loaded.
+               Not typically an issue with Coypu except for certain situations, but probably
+               useful for for the base Selenium Framework, and might as well stay consistent.
+            */
+            while (!LoginPage.IsAt)
+            {
+                Thread.Sleep(20);
+            }
         }
 
         /// <summary>
