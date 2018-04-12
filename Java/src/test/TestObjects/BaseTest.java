@@ -1,18 +1,15 @@
 package TestObjects;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.net.URL;
-
 import PageObjectsAndTools.LoginPage;
 import PageObjectsAndTools.PageObject;
-import io.github.bonigarcia.wdm.ChromeDriverManager;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -23,7 +20,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -48,7 +44,6 @@ public class BaseTest {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected PageObject pageObject;
     protected LoginPage loginPage;
     static String URL = "https://mhk-xpx.github.io/mixtape-frontend/#/login";
     /**
@@ -78,9 +73,9 @@ public class BaseTest {
      * annotation. This method is primarily responsible for obtaining a unique
      * WebDriver object for the test to use.
      */
-    @Parameters({"username", "selenium.browser"})
+    @Parameters({"selenium.browser", "username", "password"})
     @BeforeMethod
-    public void setup(Method m, String username, String browser) {
+    public void setup(Method m, String browser, String username, String password) throws IOException {
         LOG.debug("Initializing WebDriver...");
         LOG.debug("Finished initializing WebDriver!");
         LOG.debug("Beginning Test '{}'...", this.getTestName(m));
@@ -88,9 +83,9 @@ public class BaseTest {
         driver = this.localWebDriver(options);
         wait = new WebDriverWait(driver, 10);
         driver.get(URL);
+        loginPage = new LoginPage(driver, wait);
         if (!username.isEmpty()){
-            loginPage = new PageObject(driver, wait);
-            loginPage.actionSignin(username);
+            loginPage.setLogin(loginPage.getCSVInfo(0, 2), loginPage.getCSVInfo(0, 3));
         }else{
             loginPage = new LoginPage(driver, wait);
         }

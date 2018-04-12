@@ -1,9 +1,6 @@
 package PageObjectsAndTools;
-<<<<<<< Updated upstream
-=======
 
 import PageObjectsAndTools.BaseObject;
->>>>>>> Stashed changes
 import PageObjectsAndTools.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,11 +10,13 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.script.ScriptContext;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class LoginPage extends PageObject {
 
-    public LoginPage(WebDriver driver, WebDriverWait wait) {
+    public LoginPage(WebDriver driver, WebDriverWait wait) throws FileNotFoundException {
         super(driver, wait);
     }
 

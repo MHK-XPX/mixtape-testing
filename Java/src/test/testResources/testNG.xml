@@ -1,20 +1,32 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="JavaMixtapeTesting" parallel="tests" thread-count="1">
-<parameter name="selenium.browser" value="chrome"/>
-<parameter name="signin" value="true"/>
+
 <test name="PlayLists">
+    <parameter name="selenium.browser" value="chrome"/>
+    <parameter name="username" value="hvincent"/>
+    <parameter name="password" value="d1r9a8g5o"/>
     <classes>
         <class name="TestObjects.CSVTests.MadilenaPlaylistChillTunesTest"/>
     </classes>
 </test>
 <test name="FrontEnd">
     <parameter name="selenium.browser" value="firefox"/>
-    <parameter name="signin" value="true"/>
+    <parameter name="username" value=""/>
+    <parameter name="password" value=""/>
     <classes>
         <class name="TestObjects.CSVTests.LoginPageTests"/>
     </classes>
 </test>
+<test name="FrontEnd">
+    <parameter name="selenium.browser" value="firefox"/>
+    <parameter name="username" value=""/>
+    <parameter name="password" value=""/>
+    <classes>
+        <class name="TestObjects.CSVTests.LoginPageTests"/>
+    </classes>
+</test>
+
 </suite>
 
 <!--<?xml version="1.0" encoding="UTF-8"?>

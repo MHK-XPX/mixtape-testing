@@ -10,13 +10,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-<<<<<<< Updated upstream
 import org.openqa.selenium.support.ui.ExpectedConditions;
-=======
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
-
->>>>>>> Stashed changes
 /**
  * <p>Base PageObject class.
  *
@@ -28,18 +30,17 @@ public class PageObject {
     static String URL = "https://mhk-xpx.github.io/mixtape-frontend/#/home";
     protected WebDriver driver;
     protected WebDriverWait wait;
-<<<<<<< Updated upstream
     protected String baseURL = "https://mhk-xpx.github.io/mixtape-frontend/";
-    LoginPage loginPage;
-=======
->>>>>>> Stashed changes
+    protected LoginPage loginPage;
+    protected String PROFILEINFO = "main/resources/Profile_Info";
+    protected BufferedReader br = new BufferedReader(new FileReader(PROFILEINFO));
 
     /**
      * @return youtubebutton webelement within the video that is displayed when a song is played.
      */
 
     public WebElement getYouTubeButton(){
-        WebElement youTubeButton = driver.findElement(By.xpath("//a[@class= 'ytp-youtube-button ytp-button yt-uix-sessionlink']"));
+        WebElement youTubeButton = driver.findElement(By.cssSelector("youtube-player"));
         return youTubeButton;
     }
 
@@ -82,15 +83,9 @@ public class PageObject {
      *
      * @param driver The WebDriver object to use. This should be passed in from the test method.
      */
-    public PageObject(WebDriver driver, WebDriverWait wait) {
-
-<<<<<<< Updated upstream
-        this(driver, null);
-        wait = new WebDriverWait(driver, 20);
-=======
+    public PageObject(WebDriver driver, WebDriverWait wait) throws FileNotFoundException {
         this.driver = driver;
         this.wait = wait;
->>>>>>> Stashed changes
     }
 
     /**
@@ -102,7 +97,7 @@ public class PageObject {
      * @param driver The WebDriver object to use. This should be passed in from the test method.
      * @param url The URL to load prior to instantiation.
      */
-    public PageObject(WebDriver driver, String url) {
+    public PageObject(WebDriver driver, String url) throws FileNotFoundException {
         this.driver = driver;
 
         if (!StringUtils.isEmpty(url)) {
@@ -153,11 +148,10 @@ public class PageObject {
         return title.equals(expectedVideoName);
     }
 
-<<<<<<< Updated upstream
     /**
      Clicks playlist song
      */
-=======
+
     public WebElement getNavItem(){return driver.findElement(By.cssSelector("[ngbdropdown]"));}
 
     public WebElement getButton() {
@@ -165,7 +159,6 @@ public class PageObject {
     }
 
     public WebElement getDropDownItem() {return driver.findElement(By.cssSelector(".dropdown-item"));}
->>>>>>> Stashed changes
 
     protected void clickPlaylistSong(String songLink) {
         driver
@@ -190,18 +183,18 @@ public class PageObject {
                 .click();
     }
 
-
-
-
-<<<<<<< Updated upstream
-
-=======
     public boolean frontEnd() {return driver.getCurrentUrl().contains("home");}
 
-    public String getCurrentUrl() {
-        wait.until(ExpectedConditions.visibilityOf(getYouTubeButton()));
-        return driver.getCurrentUrl();
+    public boolean signedIn() {
+        wait.until(ExpectedConditions.elementToBeClickable(getYouTubeButton()));
+        return true;
     }
->>>>>>> Stashed changes
+
+    public String getCSVInfo(int i, int j) throws IOException {
+        String line = Files.readAllLines(Paths.get(PROFILEINFO)).get(i);
+        String info[] = line.split(",");
+        return info[j];
+    }
+
 }
 
