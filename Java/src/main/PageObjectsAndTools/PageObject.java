@@ -46,22 +46,15 @@ public class PageObject {
      * @return youtubebutton webelement within the video that is displayed when a song is played.
      */
 
-    public WebElement getYouTubeButton(){
-        WebElement youTubeButton = driver.findElement(By.xpath("//a[@href= 'https://www.youtube.com/watch?v=eFPmGL8jUvA']"));
-        return youTubeButton;
+    public void clickYouTubeButton(){
+       driver.findElement(By.xpath("//a[@href= 'https://www.youtube.com/watch?v=eFPmGL8jUvA']")).click();
+
     }
 
     /**
      * @return the text of the video name that youtube displays
      */
 
-    /**
-     *
-     * @return
-     */
-    /*public WebElement getChillTunes(){
-    return driver.findElement(By.xpath("li.list-group-item list-group-item-action ng-tns-c3-8"));
-    }*/
 
     public String getYouTubeVideoName(){
         String videoName = driver
@@ -130,10 +123,9 @@ public class PageObject {
         clickDesiredPlaylist(playlistLink);
         waitUtils.hardWait(10000);
         clickPlaylistSong(songLink);
-        getYouTubeButton().click();
+        clickYouTubeButton();
 
-        waitUtils.hardWait(100000);
-
+        waitUtils.hardWait(10000);
         String title = getYouTubeVideoName();
         goToMixTapeHome();
         return title.equals(expectedVideoName);
@@ -144,11 +136,10 @@ public class PageObject {
      */
 
     protected void clickPlaylistSong(String songLink) {
-
         driver
                 .findElement(By.xpath("//*[text()[contains(. , '"+songLink+"')]]"))
                 .click();
-        waitUtils.hardWait(50000);
+        waitUtils.hardWait(5000);
     }
 
     /**
