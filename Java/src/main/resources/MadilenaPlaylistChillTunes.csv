@@ -1,5 +1,7 @@
-Name of song in playlist(playlistLink), name of video on youtube (songLink)
-chillTunes,The Man Who Lives Forever,Lord Huron - The Man Who Lives Forever
-chillTunes,Lonesome Dreams,Lord Huron - Lonesome Dreams (Official)
-chillTunes,Blue Jeans,Lana Del Rey - Blue Jeans
-chillTunes,Neighbor Song,Aunt Martha - Neighbor Song
+Name of playlist(playlistLink),Name of song in playlist(songLink), name of video on youtube (expected)
+chillTunes,1. The Man Who Lives Forever,Lord Huron - The Man Who Lives Forever
+NotACleverPlaylistName,1. Pine Needle Tea,Chadwick Stokes - Pine Needle Tea - Audiotree Live
+chillTunes,2. Lonesome Dreams,Lord Huron - Lonesome Dreams (Official)
+NotACleverPlaylistName, 2. California Sunrise, Dirty Gold - California Sunrise
+chillTunes,3. Blue Jeans,Lana Del Rey - Blue Jeans
+chillTunes,4. Neighbor Song,Aunt Martha - Neighbor Song

@@ -90,9 +90,7 @@ public class LoginPage extends PageObject {
      */
 
     public boolean runMadilenaPlaylist(String playlistLink, String songLink, String expectedVideoName) {
-        //MadilenaRobotLogin();
        return runPlaylistLinksMethod(playlistLink, songLink, expectedVideoName);
-
     }
         /**
          * creates the login for Madilena's mixtape page

@@ -47,7 +47,7 @@ public class PageObject {
      */
 
     public WebElement getYouTubeButton(){
-        WebElement youTubeButton = driver.findElement(By.xpath("//a[@class= 'ytp-youtube-button ytp-button yt-uix-sessionlink']"));
+        WebElement youTubeButton = driver.findElement(By.xpath("//a[@href= 'https://www.youtube.com/watch?v=eFPmGL8jUvA']"));
         return youTubeButton;
     }
 
@@ -127,9 +127,13 @@ public class PageObject {
      */
 
     public boolean runPlaylistLinksMethod(String playlistLink , String songLink, String expectedVideoName) {
-        clickPlaylistSong(playlistLink , songLink);
-        getYouTubeButton().click();
+        clickDesiredPlaylist(playlistLink);
         waitUtils.hardWait(10000);
+        clickPlaylistSong(songLink);
+        getYouTubeButton().click();
+
+        waitUtils.hardWait(100000);
+
         String title = getYouTubeVideoName();
         goToMixTapeHome();
         return title.equals(expectedVideoName);
@@ -139,13 +143,12 @@ public class PageObject {
      Clicks playlist song
      */
 
-    protected void clickPlaylistSong(String playistLink , String songLink) {
-        clickDesiredPlaylist(playistLink);
+    protected void clickPlaylistSong(String songLink) {
+
         driver
-                .findElement(By.xpath("//div[class = 'card ng-tns-c4-0']"))
-                .findElement(By.xpath("//ol[contains(text() , "+songLink+")]"))
+                .findElement(By.xpath("//*[text()[contains(. , '"+songLink+"')]]"))
                 .click();
-        waitUtils.hardWait(100000);
+        waitUtils.hardWait(50000);
     }
 
     /**
@@ -155,10 +158,8 @@ public class PageObject {
 
     protected void clickDesiredPlaylist(String playlistLink){
        driver
-               .findElement(By.xpath("//ul[@class = 'list-group list-group-flush']"))
-               .findElement(By.xpath("//li[contains(text() , "+playlistLink+")]"))
+               .findElement(By.xpath("//*[text()[contains(. , '"+playlistLink+"')]]"))
                .click();
-
     }
 
 }
