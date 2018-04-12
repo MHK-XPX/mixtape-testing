@@ -10,7 +10,6 @@ namespace MixTapeTests
         [TestMethod]
         public void GoHome()
         {
-            LoginPage.GoTo();
             LoginPage.LoginAs("testuser").WithPassword("password").Login();
             ProfilePage.GoTo();
             Navbar.GoHome();
@@ -20,7 +19,6 @@ namespace MixTapeTests
         [TestMethod]
         public void NextSong()
         {
-            LoginPage.GoTo();
             LoginPage.LoginAs("testuser").WithPassword("password").Login();
             Playlist.ClickPlaylist("Playlist 1");
             Navbar.Next();

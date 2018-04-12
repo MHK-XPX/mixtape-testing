@@ -56,7 +56,7 @@ namespace MixTapeCoypuFramework
 
         public static bool IsAt(string url)
         {
-            return string.Equals(Instance.Location, BaseUrl + url);
+            return string.Equals(Instance.Location.AbsoluteUri, BaseUrl + url);
         }
 
         public static void Close()

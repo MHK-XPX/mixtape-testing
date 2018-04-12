@@ -122,8 +122,31 @@ namespace MixTapeCoypuFramework.Pages
             }
         }
 
+        /// <summary>
+        /// Checks to see if the "Invalid username/password" message is displayed
+        /// </summary>
+        public static bool IsInvalid
+        {
+            get
+            {
+                try
+                {
+                    // If the Id is not null, then the alert exists and we have an invalid username or password
+                    return Driver.Instance.FindCss("login > ngb-alert > div").Id != null;
+                }
+                catch (Coypu.MissingHtmlException e)
+                {
+                    return false;
+                }
+            }
+        }
+
         public static LoginCommand LoginAs(string username)
         {
+            if (!IsAt)
+            {
+                GoTo();
+            }
             return new LoginCommand(username);
         }
 
@@ -140,6 +163,10 @@ namespace MixTapeCoypuFramework.Pages
 
         public static CreateCommand CreateNewAccount()
         {
+            if (!IsAt)
+            {
+                GoTo();
+            }
             CreateAccountLink.Click();
             return new CreateCommand();
         }

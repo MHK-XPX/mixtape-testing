@@ -70,7 +70,6 @@ namespace MixTapeCoypuFramework.Pages
 
         public static void GoTo()
         {
-            //Driver.GoTo(Url);
             Navbar.Profile();
         }
 
@@ -84,11 +83,19 @@ namespace MixTapeCoypuFramework.Pages
 
         public static ProfileCommand UpdateInfo()
         {
+            if (!IsAt)
+            {
+                GoTo();
+            }
             return new ProfileCommand();
         }
 
         public static void CancelUpdate()
         {
+            if (!IsAt)
+            {
+                GoTo();
+            }
             Cancel.Click();
         }
     }

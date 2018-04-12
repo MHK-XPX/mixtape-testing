@@ -61,15 +61,19 @@ namespace MixTapeCoypuFramework.Component
             Playlists.FindCss("li", Options.First).Click();
         }
 
+        /// <summary>
+        /// Sleep until the Playlist Component is loaded and populated
+        /// </summary>
         public static void WaitUntilLoaded()
         {
-            bool isLoaded = false;
+            // Make sure we are at the Dashboard Page before we check if the component is loaded
+            // This check is for the case that the login fails
+            bool isLoaded = !Pages.DashboardPage.IsAt;
 
             while (!isLoaded)
             {
                 try
                 {
-
                     if (Playlists.InnerHTML.Contains("li"))
                     {
                         isLoaded = true;

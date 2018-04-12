@@ -7,6 +7,9 @@ namespace MixTapeTests
     [TestClass]
     public class TestBase
     {
+        public static string Username = Properties.Settings.Default.Username;
+        public static string Password = Properties.Settings.Default.Password;
+
         [TestInitialize]
         public void Setup()
         {

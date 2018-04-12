@@ -90,9 +90,15 @@ namespace MixTapeCoypuFramework.Component
             Driver.Instance.ClickButton("Logout");
         }
 
+        /// <summary>
+        /// Sleep until the Navbar Component is Loaded.
+        /// This especially helps for the slow login times that occasionally occur.
+        /// </summary>
         public static void WaitUntilLoaded()
         {
-            bool isLoaded = false;
+            // Make sure we are at the Dashboard Page before we check if the component is loaded
+            // This check is for the case that the login fails
+            bool isLoaded = !Pages.DashboardPage.IsAt;
 
             while (!isLoaded)
             {
