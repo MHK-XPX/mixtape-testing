@@ -78,9 +78,9 @@ public class BaseTest {
      * annotation. This method is primarily responsible for obtaining a unique
      * WebDriver object for the test to use.
      */
-    @Parameters({"signin", "selenium.browser"})
+    @Parameters({"username", "selenium.browser"})
     @BeforeMethod
-    public void setup(Method m, boolean signin, String browser) {
+    public void setup(Method m, String username, String browser) {
         LOG.debug("Initializing WebDriver...");
         LOG.debug("Finished initializing WebDriver!");
         LOG.debug("Beginning Test '{}'...", this.getTestName(m));
@@ -88,9 +88,9 @@ public class BaseTest {
         driver = this.localWebDriver(options);
         wait = new WebDriverWait(driver, 10);
         driver.get(URL);
-        if (signin){
-            pageObject = new PageObject(driver, wait);
-            pageObject.actionSignin();
+        if (!username.isEmpty()){
+            loginPage = new PageObject(driver, wait);
+            loginPage.actionSignin(username);
         }else{
             loginPage = new LoginPage(driver, wait);
         }
