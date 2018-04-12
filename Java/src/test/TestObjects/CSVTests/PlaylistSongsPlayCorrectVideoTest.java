@@ -4,7 +4,6 @@ import PageObjectsAndTools.LoginPage;
 import PageObjectsAndTools.PageObject;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import TestObjects.BaseTest;
@@ -25,7 +24,7 @@ public class PlaylistSongsPlayCorrectVideoTest extends BaseTest{
      */
 
     @DataProvider(name = "csvFileLoader")
-    public Object[][] getDataFromCSV() {
+    public Object[][] getDataFromChillTunesCSV() {
         return csvService.readCsv(fileName, true);
     }
 

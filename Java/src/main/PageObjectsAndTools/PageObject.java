@@ -47,21 +47,29 @@ public class PageObject {
      */
 
     public void clickYouTubeButton(){
-       driver.findElement(By.xpath("//a[@href= 'https://www.youtube.com/watch?v=eFPmGL8jUvA']")).click();
+       driver
+                .findElement(By.cssSelector("a:contains('YouTube')"))
+                .click();
 
+    }
+
+    public String getVideoTitle(){
+       WebElement videoName=  driver
+             .findElement(By.xpath("//*[@aria-label='YouTube Video Player']/div[3]/div[1]/div[2]/a"));
+             return videoName.getText();
     }
 
     /**
      * @return the text of the video name that youtube displays
      */
 
-
+/*
     public String getYouTubeVideoName(){
         String videoName = driver
                 .findElement(By.xpath("//h1[@class = 'style-scope ytd-video-primary-info-renderer']"))
                 .getText();
         return videoName;
-    }
+    }*/
 
     public WebElement getMixTapeLogo(){
         WebElement logo = driver.findElement(By.cssSelector("div.d-inline"));
@@ -123,11 +131,10 @@ public class PageObject {
         clickDesiredPlaylist(playlistLink);
         waitUtils.hardWait(10000);
         clickPlaylistSong(songLink);
-        clickYouTubeButton();
-
-        waitUtils.hardWait(10000);
-        String title = getYouTubeVideoName();
-        goToMixTapeHome();
+        waitUtils.hardWait(100000);
+        String title = getVideoTitle();
+        waitUtils.hardWait(25000);
+        //goToMixTapeHome();
         return title.equals(expectedVideoName);
     }
 

@@ -1,18 +1,20 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="JavaMixtapeTesting" parallel="tests" thread-count="1">
-    <parameter name="selenium.browser" value="chrome"/>
 
-    <test name="PlayLists">
+<suite name="JavaMixtapeTesting">
+    <test name="JavaMixtapeTesting">
+    <!--<parameter name="selenium.browser" value="chrome"/>
+
+    <test name="PlayLists">-->
         <classes>
             <class name="TestObjects.CSVTests.PlaylistSongsPlayCorrectVideoTest"/>
         </classes>
-    </test>
-    <test name="FrontEnd">
+  </test>
+   <!-- <test name="FrontEnd">
         <parameter name="selenium.browser" value="firefox"/>
         <parameter name="signin" value="true"/>
         <classes>
             <class name="TestObjects.CSVTests.LoginPageTests"/>
         </classes>
-    </test>
+    </test>-->
 </suite>
