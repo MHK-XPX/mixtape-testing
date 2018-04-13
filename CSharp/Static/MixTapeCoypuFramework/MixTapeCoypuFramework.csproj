@@ -60,12 +60,13 @@
   <ItemGroup>
     <Compile Include="Component\PlaylistComponent.cs" />
     <Compile Include="Component\NavbarComponent.cs" />
-    <Compile Include="Driver.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Utility\Driver.cs" />
+    <Compile Include="Utility\Constants.cs" />
     <Compile Include="Pages\DashboardPage.cs" />
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\ProfilePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Enums.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

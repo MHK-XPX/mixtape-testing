@@ -13,7 +13,7 @@ namespace MixTapeTests
         [TestInitialize]
         public void Setup()
         {
-            Driver.Initialize(Driver.DriverTypes.Chrome);
+            Driver.Initialize(DriverTypes.Chrome);
         }
 
         public void Wait(int milliseconds)

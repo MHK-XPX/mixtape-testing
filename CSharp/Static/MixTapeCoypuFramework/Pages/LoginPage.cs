@@ -8,7 +8,7 @@ namespace MixTapeCoypuFramework.Pages
     /// </summary>
     public static class LoginPage
     {
-        private static string Url = "/#/login";
+        public static string Url = "/#/login";
 
         #region Elements
         #region Login Page
@@ -111,7 +111,7 @@ namespace MixTapeCoypuFramework.Pages
 
         public static void GoTo()
         {
-            Driver.GoTo(Url);
+            Driver.GoTo(PageTypes.Login);
         }
 
         public static bool IsAt
@@ -143,19 +143,13 @@ namespace MixTapeCoypuFramework.Pages
 
         public static LoginCommand LoginAs(string username)
         {
-            if (!IsAt)
-            {
-                GoTo();
-            }
+            Driver.CheckLocation(PageTypes.Login);
             return new LoginCommand(username);
         }
 
         public static void LoginWithDefault()
         {
-            if (!IsAt)
-            {
-                GoTo();
-            }
+            Driver.CheckLocation(PageTypes.Login);
             UserName.FillInWith("testuser");
             Password.FillInWith("password");
             LoginButton.Click();
@@ -163,10 +157,7 @@ namespace MixTapeCoypuFramework.Pages
 
         public static CreateCommand CreateNewAccount()
         {
-            if (!IsAt)
-            {
-                GoTo();
-            }
+            Driver.CheckLocation(PageTypes.Login);
             CreateAccountLink.Click();
             return new CreateCommand();
         }

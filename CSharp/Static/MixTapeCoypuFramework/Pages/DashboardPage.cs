@@ -9,11 +9,11 @@ namespace MixTapeCoypuFramework.Pages
 {
     public static class DashboardPage
     {
-        private static string Url = "/#/home";
+        public static string Url = "/#/home";
 
         public static void GoTo()
         {
-            Driver.GoTo(Url);
+            Driver.GoTo(PageTypes.Dashboard);
         }
 
         public static bool IsAt

@@ -8,7 +8,7 @@ namespace MixTapeCoypuFramework.Pages
     /// </summary>
     public static class ProfilePage
     {
-        private static string Url = "/#/profile";
+        public static string Url = "/#/profile";
 
         #region Elements
         public static ElementScope FirstName
@@ -83,19 +83,13 @@ namespace MixTapeCoypuFramework.Pages
 
         public static ProfileCommand UpdateInfo()
         {
-            if (!IsAt)
-            {
-                GoTo();
-            }
+            Driver.CheckLocation(PageTypes.Profile);
             return new ProfileCommand();
         }
 
         public static void CancelUpdate()
         {
-            if (!IsAt)
-            {
-                GoTo();
-            }
+            Driver.CheckLocation(PageTypes.Profile);
             Cancel.Click();
         }
     }

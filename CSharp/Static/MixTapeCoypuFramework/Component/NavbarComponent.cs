@@ -11,6 +11,7 @@ namespace MixTapeCoypuFramework.Component
     public static class Navbar
     {
         private static bool IsLoaded = false;
+
         #region Elements
         private static ElementScope UserMenu
         {
@@ -46,15 +47,7 @@ namespace MixTapeCoypuFramework.Component
         {
             WaitUntilLoaded();
             Driver.Instance.FindSection("Mi").Click();
-            /* Sleep until we get to the Dashboard.
-               Sometimes the next command happens before the page is loaded.
-               Not typically an issue with Coypu except for certain situations, but probably
-               useful for for the base Selenium Framework, and might as well stay consistent.
-            */
-            while (!DashboardPage.IsAt)
-            {
-                Thread.Sleep(20);
-            }
+            Driver.WaitFor(PageTypes.Dashboard);
         }
 
         public static void Search(string query)
@@ -104,15 +97,7 @@ namespace MixTapeCoypuFramework.Component
             WaitUntilLoaded();
             UserMenu.Click();
             Driver.Instance.ClickButton("Profile");
-            /* Sleep until we get to the Profile Page.
-               Sometimes the next command happens before the page is loaded.
-               Not typically an issue with Coypu except for certain situations, but probably
-               useful for for the base Selenium Framework, and might as well stay consistent.
-            */
-            while (!ProfilePage.IsAt)
-            {
-                Thread.Sleep(20);
-            }
+            Driver.WaitFor(PageTypes.Profile);
         }
 
         public static void Logout()
@@ -120,15 +105,7 @@ namespace MixTapeCoypuFramework.Component
             WaitUntilLoaded();
             UserMenu.Click();
             Driver.Instance.ClickButton("Logout");
-            /* Sleep until we get to the Login Page.
-               Sometimes the next command happens before the page is loaded.
-               Not typically an issue with Coypu except for certain situations, but probably
-               useful for for the base Selenium Framework, and might as well stay consistent.
-            */
-            while (!LoginPage.IsAt)
-            {
-                Thread.Sleep(20);
-            }
+            Driver.WaitFor(PageTypes.Login);
         }
 
         /// <summary>
@@ -137,8 +114,6 @@ namespace MixTapeCoypuFramework.Component
         /// </summary>
         public static void WaitUntilLoaded()
         {
-            //bool isLoaded = false;
-
             while (!IsLoaded)
             {
                 try
