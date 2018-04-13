@@ -6,7 +6,7 @@ namespace MixTapeCoypuFramework.Pages
     /// <summary>
     /// The Profile page object, handles the Profile page functionality
     /// </summary>
-    public static class ProfilePage
+    public class ProfilePage
     {
         public static string Url = "/#/profile";
 

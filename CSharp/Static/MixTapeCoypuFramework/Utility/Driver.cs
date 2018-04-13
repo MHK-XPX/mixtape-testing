@@ -12,7 +12,7 @@ namespace MixTapeCoypuFramework
     /// Stores the "driver" instance, and is in charge of initializing/disposing of it.
     /// Also stores the website's base url and the base GoTo and IsAt functionality.
     /// </summary>
-    public static class Driver
+    public class Driver
     {
         private const string HUB_URL = "http://localhost:4444/wd/hub";
         private const string PageNamespace = "MixTapeCoypuFramework.Pages.";

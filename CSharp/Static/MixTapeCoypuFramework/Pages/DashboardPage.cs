@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace MixTapeCoypuFramework.Pages
 {
-    public static class DashboardPage
+    public class DashboardPage
     {
         public static string Url = "/#/home";
 

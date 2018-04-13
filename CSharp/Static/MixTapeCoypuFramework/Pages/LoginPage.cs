@@ -6,7 +6,7 @@ namespace MixTapeCoypuFramework.Pages
     /// <summary>
     /// The Login page object, handles the Login page functionality
     /// </summary>
-    public static class LoginPage
+    public class LoginPage
     {
         public static string Url = "/#/login";
 

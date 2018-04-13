@@ -8,7 +8,7 @@ namespace MixTapeCoypuFramework.Component
     /// <summary>
     /// The Navbar component object, handles the Navbar functionality
     /// </summary>
-    public static class Navbar
+    public class Navbar
     {
         private static bool IsLoaded = false;
 

@@ -2,7 +2,7 @@
 using MixTapeCoypuFramework.Component;
 using MixTapeCoypuFramework.Pages;
 
-namespace MixTapeTests
+namespace MixTapeTests.Components
 {
     [TestClass]
     public class NavBarTest : TestBase
@@ -10,7 +10,7 @@ namespace MixTapeTests
         [TestMethod]
         public void GoHome()
         {
-            LoginPage.LoginAs("testuser").WithPassword("password").Login();
+            LoginPage.LoginWithDefault();
             ProfilePage.GoTo();
             Navbar.GoHome();
             Assert.IsTrue(DashboardPage.IsAt);
@@ -19,8 +19,8 @@ namespace MixTapeTests
         [TestMethod]
         public void NextSong()
         {
-            LoginPage.LoginAs("testuser").WithPassword("password").Login();
-            Playlist.ClickPlaylist("Playlist 1");
+            LoginPage.LoginWithDefault();
+            Playlist.ClickFirstPlaylist();
             Navbar.Next();
             Navbar.PlayPause();
             Navbar.Last();

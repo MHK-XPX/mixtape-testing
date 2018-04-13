@@ -55,9 +55,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NavBarTest.cs" />
-    <Compile Include="ProfileTest.cs" />
-    <Compile Include="LoginTest.cs" />
+    <Compile Include="Components\NavBarTest.cs" />
+    <Compile Include="Components\PlaylistTest.cs" />
+    <Compile Include="Pages\CreateUserTest.cs" />
+    <Compile Include="Pages\ProfileTest.cs" />
+    <Compile Include="Pages\LoginTest.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

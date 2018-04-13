@@ -2,7 +2,7 @@
 using MixTapeCoypuFramework.Component;
 using MixTapeCoypuFramework.Pages;
 
-namespace MixTapeTests
+namespace MixTapeTests.Pages
 {
     [TestClass]
     public class LoginTest : TestBase
