@@ -9,6 +9,7 @@ namespace MixTapeCoypuFramework.Component
     /// </summary>
     public static class Playlist
     {
+        private static bool IsLoaded = false;
         #region Elements
         private static ElementScope CreatePlaylistButton
         {
@@ -37,16 +38,19 @@ namespace MixTapeCoypuFramework.Component
 
         public static void CreatePlaylist()
         {
+            WaitUntilLoaded();
             CreatePlaylistButton.Click();
         }
 
         public static void ClearQueue()
         {
+            WaitUntilLoaded();
             ClearQueueButton.Click();
         }
 
         public static void ClickPlaylist(string playlistName)
         {
+            WaitUntilLoaded();
             foreach (ElementScope playlist in Playlists.FindAllCss("li"))
             {
                 if (playlist.Text.Trim().Equals(playlistName))
@@ -58,6 +62,7 @@ namespace MixTapeCoypuFramework.Component
 
         public static void ClickFirstPlaylist()
         {
+            WaitUntilLoaded();
             Playlists.FindCss("li", Options.First).Click();
         }
 
@@ -66,17 +71,15 @@ namespace MixTapeCoypuFramework.Component
         /// </summary>
         public static void WaitUntilLoaded()
         {
-            // Make sure we are at the Dashboard Page before we check if the component is loaded
-            // This check is for the case that the login fails
-            bool isLoaded = !Pages.DashboardPage.IsAt;
+            //bool isLoaded = false;
 
-            while (!isLoaded)
+            while (!IsLoaded)
             {
                 try
                 {
                     if (Playlists.InnerHTML.Contains("li"))
                     {
-                        isLoaded = true;
+                        IsLoaded = true;
                         break;
                     }
                     else

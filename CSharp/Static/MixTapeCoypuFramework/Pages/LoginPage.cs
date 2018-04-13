@@ -265,8 +265,6 @@ namespace MixTapeCoypuFramework.Pages
             LoginPage.Password.FillInWith(password);
             if (rememberMe) LoginPage.RememberMe.Check();
             LoginPage.LoginButton.Click();
-            Navbar.WaitUntilLoaded();
-            Playlist.WaitUntilLoaded();
         }
     }
 }
