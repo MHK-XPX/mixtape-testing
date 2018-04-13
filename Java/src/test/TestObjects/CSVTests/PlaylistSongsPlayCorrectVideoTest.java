@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import TestObjects.BaseTest;
 
 public class PlaylistSongsPlayCorrectVideoTest extends BaseTest{
-    PageObject pageObject;
     LoginPage loginPage;
 
     public void setUp() {
@@ -29,6 +28,7 @@ public class PlaylistSongsPlayCorrectVideoTest extends BaseTest{
     }
 
     @Test(dataProvider = "csvFileLoader")
+
     public void verifyPlaylistAndSongAndVideo(String n1,String n2,String n3) {
         setUp();
         loginPage.setLogin("MadilenaM", "NickSurfsBirdRock");

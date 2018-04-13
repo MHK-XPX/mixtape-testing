@@ -49,7 +49,7 @@ public class PageObject {
         getPauseButton().click();
         driver.switchTo().frame(driver.findElement(By.cssSelector("youtube-player>iframe")));
         String title = driver.findElement(By.cssSelector("div.ytp-chrome-top.ytp-share-button-visible > div.ytp-title > div.ytp-title-text ")).getText();
-        waitUtils.hardWait(500);
+        waitUtils.hardWait(DEFAULT_DELAY_MS);
         driver.switchTo().defaultContent();
         return title;
     }
