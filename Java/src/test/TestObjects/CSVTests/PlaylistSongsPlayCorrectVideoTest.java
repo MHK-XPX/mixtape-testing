@@ -20,7 +20,7 @@ public class PlaylistSongsPlayCorrectVideoTest extends BaseTest{
     String fileName = "/home/xpanxion/IdeaProjects/JavaMixtapeAutomation/mixtape-testing/Java/src/main/resources/MadilenaPlaylistChillTunes.csv";
 
     /**
-     * @DataProvider gets the data from the csv file FooterLinksDataDrivenTests
+     * @DataProvider gets the data from the csv file PlaylistSongsPlayCorrectVideo
      */
 
     @DataProvider(name = "csvFileLoader")
@@ -29,10 +29,10 @@ public class PlaylistSongsPlayCorrectVideoTest extends BaseTest{
     }
 
     @Test(dataProvider = "csvFileLoader")
-    public void verifyPlaylistAndSongAndVideo(String n1 , String n2 , String n3) {
+    public void verifyPlaylistAndSongAndVideo(String n1,String n2,String n3) {
         setUp();
         loginPage.setLogin("MadilenaM", "NickSurfsBirdRock");
-        Assert.assertTrue(loginPage.runPlaylistLinksMethod(n1, n2, n3) , " 'PLAYLIST' LINK DOES NOT NAVIGATE TO CORRECT PAGE");
+        Assert.assertTrue(loginPage.runPlaylistLinksMethod(n1,n2,n3) , " PLAYLIST SONG DOES NOT GENERATE THE EXPECTED MUSIC VIDEO");
     }
 }
 

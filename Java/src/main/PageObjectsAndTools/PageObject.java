@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,6 +26,7 @@ public class PageObject {
     protected WebDriverWait wait;
     protected String baseURL = "https://mhk-xpx.github.io/mixtape-frontend/";
     WaitUtils waitUtils;
+    Actions action;
     public static final long DEFAULT_DELAY_MS = 1000;
 
     /**
@@ -42,52 +44,20 @@ public class PageObject {
         wait = new WebDriverWait(driver, 20);
     }
 
-    /**
-     * @return youtubebutton webelement within the video that is displayed when a song is played.
-     */
 
-    public void clickYouTubeButton(){
-       driver
-                .findElement(By.cssSelector("a:contains('YouTube')"))
-                .click();
-
+    public String getVideoTitleText(){
+        getPauseButton().click();
+        driver.switchTo().frame(driver.findElement(By.cssSelector("youtube-player>iframe")));
+        String title = driver.findElement(By.cssSelector("div.ytp-chrome-top.ytp-share-button-visible > div.ytp-title > div.ytp-title-text ")).getText();
+        waitUtils.hardWait(500);
+        driver.switchTo().defaultContent();
+        return title;
     }
 
-    public String getVideoTitle(){
-       WebElement videoName=  driver
-             .findElement(By.xpath("//*[@aria-label='YouTube Video Player']/div[3]/div[1]/div[2]/a"));
-             return videoName.getText();
+    public WebElement getPauseButton(){
+        return driver.findElement(By.id("playPauseButton"));
     }
 
-    /**
-     * @return the text of the video name that youtube displays
-     */
-
-/*
-    public String getYouTubeVideoName(){
-        String videoName = driver
-                .findElement(By.xpath("//h1[@class = 'style-scope ytd-video-primary-info-renderer']"))
-                .getText();
-        return videoName;
-    }*/
-
-    public WebElement getMixTapeLogo(){
-        WebElement logo = driver.findElement(By.cssSelector("div.d-inline"));
-        return logo;
-    }
-
-    public void goToMixTapeHome() {
-        driver.navigate().to(baseURL + "#/home");
-    }
-
-    /**
-     * @return the playlist header above the list of playlists you make
-     */
-
-    public WebElement getPlaylistLogo(){
-        WebElement playlistlogo = driver.findElement(By.xpath("//div[@class = 'card-header text-center font-weight-bold']"));
-        return playlistlogo;
-    }
 
     /**
      * Instantiates this PageObject and subsequently loads all of the WebElements associated
@@ -129,12 +99,11 @@ public class PageObject {
 
     public boolean runPlaylistLinksMethod(String playlistLink , String songLink, String expectedVideoName) {
         clickDesiredPlaylist(playlistLink);
-        waitUtils.hardWait(10000);
+        waitUtils.hardWait(DEFAULT_DELAY_MS);
         clickPlaylistSong(songLink);
-        waitUtils.hardWait(100000);
-        String title = getVideoTitle();
-        waitUtils.hardWait(25000);
-        //goToMixTapeHome();
+        waitUtils.hardWait(DEFAULT_DELAY_MS);
+        String title = getVideoTitleText();
+        waitUtils.hardWait(DEFAULT_DELAY_MS);
         return title.equals(expectedVideoName);
     }
 
