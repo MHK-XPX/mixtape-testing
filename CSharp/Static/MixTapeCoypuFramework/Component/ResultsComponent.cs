@@ -11,39 +11,29 @@ namespace MixTapeCoypuFramework.Component
     {
         private static bool IsLoaded = false;
         #region Elements
-        private static ElementScope CreatePlaylistButton
+        private static ElementScope Songs
         {
             get
             {
-                return Driver.Instance.FindButton("Create Playlist");
-            }
-        }
-
-        private static ElementScope ClearQueueButton
-        {
-            get
-            {
-                return Driver.Instance.FindButton("Clear Queue");
-            }
-        }
-
-        private static ElementScope Playlists
-        {
-            get
-            {
-                return Driver.Instance.FindCss("app-sidebar > div > div > ul");
+                //#ngb-tab-2-panel
+                //home > div > ngb-tabset > div > div
+                return Driver.Instance.FindCss("home > div > ngb-tabset > div > div > ul");
             }
         }
         #endregion
 
-        public static void ClickSong(string playlistName)
+        /// <summary>
+        /// Click the song with the given name
+        /// </summary>
+        /// <param name="songName">The name of the song to click</param>
+        public static void ClickSong(string songName)
         {
             WaitUntilLoaded();
-            foreach (ElementScope playlist in Playlists.FindAllCss("li"))
+            foreach (ElementScope song in Songs.FindAllCss("li"))
             {
-                if (playlist.Text.Trim().Equals(playlistName))
+                if (song.Text.Trim().Contains(songName))
                 {
-                    playlist.Click();
+                    song.Click();
                 }
             }
         }
@@ -51,9 +41,38 @@ namespace MixTapeCoypuFramework.Component
         public static void ClickFirstSong()
         {
             WaitUntilLoaded();
-            //Playlists.FindCss("li", Options.First).Click();
+            Songs.FindCss("li", Options.First).Click();
             //#ngb-tab-9-panel > div:nth-child(2) > ul:nth-child(1) > li
             //#ngb-tab-8-panel > ul > li:nth-child(2)
+        }
+
+        private static void AddSongToPlaylist(string songName, string playlistName)
+        {
+            WaitUntilLoaded();
+            foreach (ElementScope song in Songs.FindAllCss("li"))
+            {
+                if (song.Text.Trim().Contains(songName))
+                {
+                    song.Hover();
+                    var dropup = song.FindCss("app-mouseover-menu > div > div.dropup");
+                    dropup.FindCss("img").Click();
+                    foreach (ElementScope pl in dropup.FindAllCss("li"))
+                    {
+                        if (pl.Text.Trim().Contains(playlistName))
+                        {
+                            pl.Click();
+                        }
+                    }
+                    //song.FindCss("app-mouseover-menu > div > div.show.dropup > div > ul").ClickLink(playlistName);
+                    ////app-mouseover-menu > div > div.show.dropup > div > ul
+                }
+            }
+            //#ngb-tab-10-panel > ul > li:nth-child(1) > app-mouseover-menu > div > div.dropup > img
+        }
+
+        public static ResultsCommand AddSong(string songName)
+        {
+            return new ResultsCommand(songName);
         }
 
         /// <summary>
@@ -81,6 +100,24 @@ namespace MixTapeCoypuFramework.Component
                 {
                     Thread.Sleep(25);
                 }
+            }
+        }
+
+        /// <summary>
+        /// A command class to allow chaining for the "LoginAs" method
+        /// </summary>
+        public class ResultsCommand
+        {
+            private readonly string songName;
+
+            public ResultsCommand(string songName)
+            {
+                this.songName = songName;
+            }
+
+            public void ToPlaylist(string playlistName)
+            {
+                Results.AddSongToPlaylist(songName, playlistName);
             }
         }
     }

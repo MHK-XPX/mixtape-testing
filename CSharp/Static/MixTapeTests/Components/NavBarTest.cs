@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MixTapeCoypuFramework.Component;
 using MixTapeCoypuFramework.Pages;
+using MixTapeCoypuFramework.Workflows;
 
 namespace MixTapeTests.Components
 {
@@ -20,7 +21,11 @@ namespace MixTapeTests.Components
         public void NextSong()
         {
             LoginPage.LoginWithDefault();
-            Playlist.ClickFirstPlaylist();
+            //Playlist.DeleteAllPlaylists();
+            PlaylistManager.CreateSimplePlaylist();
+            Wait(2000);
+            Playlist.ClickPlaylist(PlaylistManager.CreatedPlaylistName);
+            //Youtube.ClickFirstSong();
             Navbar.Next();
             Navbar.PlayPause();
             Navbar.Last();

@@ -12,6 +12,12 @@ namespace MixTapeCoypuFramework.Workflows
         {
             Playlist.CreatePlaylist();
             CreatedPlaylistName = Youtube.PlaylistName.Text;
+            Playlist.ClearQueue();
+            //Results.ClickFirstSong();
+            Thread.Sleep(500);
+            Results.AddSong("The Thunder Rolls").ToPlaylist(CreatedPlaylistName);
+            Results.AddSong("Kyoto").ToPlaylist(CreatedPlaylistName);
+            Thread.Sleep(2000);
             //Youtube.PlaylistName.Click();
             /*
              app-youtube > div > div:nth-child(2) > div > div > div > h5
