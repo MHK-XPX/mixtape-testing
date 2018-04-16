@@ -93,7 +93,7 @@ public class LoginPage extends PageObject {
             PasswordLogin().sendKeys(PasswordSearchText);
             SignInButton().click();
             try {
-                Thread.sleep(5000);
+                Thread.sleep(10000);
             } catch (InterruptedException e) {
                 System.out.println("DID NOT WAIT BEFORE CLICKING ENTER");
             }

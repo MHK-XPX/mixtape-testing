@@ -26,7 +26,7 @@ public class PageObject {
     protected WebDriverWait wait;
     protected String baseURL = "https://mhk-xpx.github.io/mixtape-frontend/";
     WaitUtils waitUtils;
-    Actions action;
+
     public static final long DEFAULT_DELAY_MS = 1000;
 
     /**
