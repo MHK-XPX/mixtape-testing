@@ -68,12 +68,14 @@ namespace MixTapeCoypuFramework.Component
         public static void CreatePlaylist()
         {
             WaitUntilLoaded();
+            Driver.Instance.ExecuteScript("arguments[0].scrollIntoView(false);", CreatePlaylistButton);
             CreatePlaylistButton.Click();
         }
 
         public static void ClearQueue()
         {
             WaitUntilLoaded();
+            Driver.Instance.ExecuteScript("arguments[0].scrollIntoView(false);", ClearQueueButton);
             ClearQueueButton.Click();
         }
 
@@ -114,6 +116,7 @@ namespace MixTapeCoypuFramework.Component
         public static void ClickFirstPlaylist()
         {
             WaitUntilLoaded();
+            Driver.Instance.ExecuteScript("arguments[0].scrollIntoView(false);", Playlists.FindCss("li", Options.First));
             Playlists.FindCss("li", Options.First).Click();
         }
 
@@ -128,6 +131,7 @@ namespace MixTapeCoypuFramework.Component
             {
                 if (playlist.Text.Trim().Equals(playlistName))
                 {
+                    Driver.Instance.ExecuteScript("arguments[0].scrollIntoView(false);", playlist);
                     playlist.Hover();
                     playlist.FindCss("app-mouseover-menu > div > div > img").Click();
                     return;
@@ -163,6 +167,7 @@ namespace MixTapeCoypuFramework.Component
                 // Loop backwards and delete the playlists so that we are not confusing the parent UL
                 for (int i = playlists.Count - 1; i >= 0; i--)
                 {
+                    Driver.Instance.ExecuteScript("arguments[0].scrollIntoView(false);", playlists[i]);
                     playlists[i].Hover();
                     // If we can't find the mouse over, the hover failed and we will retry in the exception
                     // so skip the wait.

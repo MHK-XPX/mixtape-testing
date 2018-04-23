@@ -33,6 +33,7 @@ namespace MixTapeCoypuFramework.Component
             {
                 if (song.Text.Trim().Contains(songName))
                 {
+                    Driver.Instance.ExecuteScript("arguments[0].scrollIntoView(false);", song);
                     song.Click();
                 }
             }
@@ -41,6 +42,7 @@ namespace MixTapeCoypuFramework.Component
         public static void ClickFirstSong()
         {
             WaitUntilLoaded();
+            Driver.Instance.ExecuteScript("arguments[0].scrollIntoView(false);", Songs.FindCss("li", Options.First));
             Songs.FindCss("li", Options.First).Click();
             //#ngb-tab-9-panel > div:nth-child(2) > ul:nth-child(1) > li
             //#ngb-tab-8-panel > ul > li:nth-child(2)
