@@ -53,6 +53,9 @@ namespace MixTapeCoypuFramework.Component
             {
                 if (song.Text.Trim().Contains(songName))
                 {
+                    // Scroll to the song since the mouseover won't work if the song is not visible
+                    // Note: we are using false to align the bottoms, otherwise the song stays behind the navbar
+                    Driver.Instance.ExecuteScript("arguments[0].scrollIntoView(false);", song);
                     song.Hover();
                     var dropup = song.FindCss("app-mouseover-menu > div > div.dropup");
                     dropup.FindCss("img").Click();

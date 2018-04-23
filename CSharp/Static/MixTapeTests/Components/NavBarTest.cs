@@ -21,11 +21,9 @@ namespace MixTapeTests.Components
         public void NextSong()
         {
             LoginPage.LoginWithDefault();
-            //Playlist.DeleteAllPlaylists();
+            Playlist.DeleteAllPlaylists();
             PlaylistManager.CreateSimplePlaylist();
-            Wait(2000);
             Playlist.ClickPlaylist(PlaylistManager.CreatedPlaylistName);
-            //Youtube.ClickFirstSong();
             Navbar.Next();
             Navbar.PlayPause();
             Navbar.Last();

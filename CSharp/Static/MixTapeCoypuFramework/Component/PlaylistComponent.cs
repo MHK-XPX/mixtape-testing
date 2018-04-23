@@ -102,6 +102,9 @@ namespace MixTapeCoypuFramework.Component
             {
                 if (playlist.Text.Trim().Equals(playlistName))
                 {
+                    // Scroll to the playlist.  This fixes an issue with trying to click when we are scrolled down and
+                    // the playlist is not currently visible.
+                    Driver.Instance.ExecuteScript("arguments[0].scrollIntoView(false);", playlist);
                     playlist.Click();
                     break;
                 }
